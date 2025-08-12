@@ -2,10 +2,8 @@ package dr.web.packagedetails.presentation.ui.compose.custom_components
 
 import android.util.Log
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -20,10 +18,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import dr.web.packagedetails.domain.common.core.UIComponent
 import dr.web.packagedetails.domain.common.core.ProgressBarState
+import dr.web.packagedetails.domain.common.core.UIComponent
 import dr.web.packagedetails.domain.common.utils.getContrastTextColor
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -34,6 +34,8 @@ fun DefaultScreenUI(
     progressBarState: ProgressBarState = ProgressBarState.Idle,
     titleToolbar: String? = null,
     colorToolbar: Color? = null,
+    startIconToolbar: ImageVector? = null,
+    onClickStartIconToolbar: (() -> Unit) = {},
     content: @Composable (PaddingValues) -> Unit,
 ) {
 
@@ -42,26 +44,29 @@ fun DefaultScreenUI(
     Scaffold(
         topBar = {
             if (titleToolbar != null) {
-                Row(
+                Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 4.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center,
+                        .padding(horizontal = 16.dp, vertical = 16.dp)
                 ) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Text(
-                            titleToolbar,
-                            style = MaterialTheme.typography.titleLarge,
-                            color = getContrastTextColor(
-                                colorToolbar ?: MaterialTheme.colorScheme.primary
-                            ),
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
+                    if (startIconToolbar != null) {
+                        IconButton(
+                            imageVector = startIconToolbar,
+                            containerColor = Color.White,
+                            onClick = onClickStartIconToolbar,
+                            modifier = Modifier.align(Alignment.CenterStart)
                         )
                     }
+
+                    Text(
+                        text = titleToolbar,
+                        style = MaterialTheme.typography.titleLarge,
+                        color = getContrastTextColor(colorToolbar ?: MaterialTheme.colorScheme.primary),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.align(Alignment.Center),
+                        textAlign = TextAlign.Center
+                    )
                 }
             }
         },

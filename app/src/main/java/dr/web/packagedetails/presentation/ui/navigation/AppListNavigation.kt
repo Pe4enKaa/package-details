@@ -8,5 +8,5 @@ sealed interface AppListNavigation {
     data object AppList : AppListNavigation
 
     @Serializable
-    data object AppDetail : AppListNavigation
+    data class AppDetail(val packageName: String) : AppListNavigation
 }

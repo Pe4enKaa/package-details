@@ -24,7 +24,7 @@ fun AppCard(app: AppInfo, onAppClick: (String) -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 8.dp)
-            .clickable { onAppClick(app.name) }
+            .clickable { onAppClick(app.packageName) }
     ) {
         Row(
             modifier = Modifier

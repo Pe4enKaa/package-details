@@ -21,6 +21,7 @@ fun AppListScreen(
     state: AppListState,
     errors: Flow<UIComponent>,
     events: (AppListEvent) -> Unit,
+    navigateToDetail: (String) -> Unit,
 ) {
     DefaultScreenUI(
         errors = errors,
@@ -37,7 +38,7 @@ fun AppListScreen(
                         it.packageName
                     }) { app ->
                         AppCard(app = app, onAppClick = {
-
+                            navigateToDetail(it)
                         })
                     }
                 }

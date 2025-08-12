@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <queries>
-        <package android:name="android.permission.QUERY_ALL_PACKAGES" />
-    </queries>
     <application
         android:name=".presentation.PackageDetailsApplication"
         android:allowBackup="true"
@@ -13,8 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.PackageDetails"
-        tools:targetApi="31">
+        android:theme="@style/Theme.PackageDetails">
         <activity
             android:name=".presentation.ui.compose.MainActivity"
             android:exported="true"
@@ -28,4 +24,26 @@
         </activity>
     </application>
 
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+
+        <intent>
+            <action android:name="android.intent.action.SEND" />
+            <data android:mimeType="*/*" />
+        </intent>
+
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:mimeType="image/*" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:mimeType="application/pdf" />
+        </intent>
+
+        <package android:name="com.google.android.apps.docs" />
+    </queries>
 </manifest>
